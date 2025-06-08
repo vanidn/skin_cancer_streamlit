@@ -22,11 +22,11 @@ if not os.path.exists(model_path):
             f.write(response.content)
         st.success("✅ Model downloaded successfully!")
 
-# Load the model
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model(model_path)
+    model = tf.keras.models.load_model("best_model_vgg16.keras", compile=False)
     return model
+
 
 model = load_model()
 
