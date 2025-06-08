@@ -11,8 +11,8 @@ st.title("🧴 Skin Cancer Classification")
 st.write("Upload a skin lesion image to predict the type of skin cancer using a deep learning model.")
 
 # Model URL from GitHub Release
-model_url = "https://github.com/vanidn/skin_cancer_streamlit/releases/download/v1.0/best_model_vgg16.keras"
-model_path = "best_model_vgg16.keras"
+model_url = "https://github.com/vanidn/skin_cancer_streamlit/releases/download/v1.0/best_model_vgg16.h5"
+model_path = "best_model_vgg16.h5"
 
 # Download model if not already present
 if not os.path.exists(model_path):
