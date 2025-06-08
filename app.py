@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 import tensorflow as tf
-import gdown
+import requests
 import os
 
 # Streamlit page config
@@ -10,14 +10,17 @@ st.set_page_config(page_title="Skin Cancer Classifier", layout="centered")
 st.title("🧴 Skin Cancer Classification")
 st.write("Upload a skin lesion image to predict the type of skin cancer using a deep learning model.")
 
-# File ID from Google Drive shareable link
-drive_file_id = "YOUR_FILE_ID_HERE"  # 🔁 Replace this with your real Google Drive file ID
+# Model URL from GitHub Release
+model_url = "https://github.com/vanidn/skin_cancer_streamlit/releases/download/v1.0/best_model_vgg16.keras"
 model_path = "best_model_vgg16.keras"
 
 # Download model if not already present
 if not os.path.exists(model_path):
-    with st.spinner("📥 Downloading model from Google Drive..."):
-        gdown.download(f"https://drive.google.com/uc?id={drive_file_id}", model_path, quiet=False)
+    with st.spinner("📥 Downloading model from GitHub Release..."):
+        response = requests.get(model_url)
+        with open(model_path, "wb") as f:
+            f.write(response.content)
+        st.success("✅ Model downloaded successfully!")
 
 # Load the model
 @st.cache_resource
