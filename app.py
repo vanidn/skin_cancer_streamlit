@@ -24,8 +24,13 @@ if not os.path.exists(model_path):
 
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("best_model_vgg16.keras", compile=False)
-    return model
+    try:
+        model = tf.keras.models.load_model("best_model_vgg16.keras", compile=False)
+        return model
+    except Exception as e:
+        st.error(f"❌ Error loading model: {e}")
+        raise
+
 
 
 model = load_model()
